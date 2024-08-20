@@ -6,7 +6,7 @@
 /*   By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 12:02:26 by mrinkine          #+#    #+#             */
-/*   Updated: 2024/08/20 18:22:25 by tvalimak         ###   ########.fr       */
+/*   Updated: 2024/08/20 22:05:02 by tvalimak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,9 @@ t_color ray_color(const t_ray *r, hittable_list *world, t_vec3 camera_pos)
 	return background;
 }
 
-void intitscreen(t_var *var)
+void intitscreen(t_var *var, t_map *map)
 {
+	(void)map;
 	float focal_length = 1.0;
 	float viewport_height = 1.0; // Jos ei 1, niin pallukat soikeita
 	float viewport_width = viewport_height * ((float)SCREEN_WIDHT / var->image_height);
@@ -153,7 +154,7 @@ void printimage(void *param, t_map *map)
 	// hittable_list_add(&world, (t_hittable *)&s5);
 	// hittable_list_add(&world, (t_hittable *)&s6);
 
-	intitscreen(var);
+	intitscreen(var, map);
 	screenloop(var, world);
 }
 
@@ -171,7 +172,7 @@ int main()
 	if (read_to_parse(&element_count, map) == 0)
 		return (0);
 	print_data(map);
-	if (mlxinit(&var))
+	if (mlxinit(&var, map) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	printimage(&var, map);
 	hooks(&var);

@@ -101,7 +101,7 @@ typedef struct s_var
 /*MLX*/
 void ft_hook(void *param);
 void hooks(t_var *var);
-int mlxinit(t_var *var);
+int mlxinit(t_var *var, t_map *map);
 
 void printimage(void *param, t_map *map);
 
