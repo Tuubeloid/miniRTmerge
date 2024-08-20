@@ -6,11 +6,12 @@
 /*   By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 12:02:26 by mrinkine          #+#    #+#             */
-/*   Updated: 2024/08/20 14:39:34 by tvalimak         ###   ########.fr       */
+/*   Updated: 2024/08/20 18:22:25 by tvalimak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minirt.h"
+#include "../includes/parsing.h"
 
 t_color ray_color(const t_ray *r, hittable_list *world, t_vec3 camera_pos)
 {
@@ -100,7 +101,7 @@ t_sphere addsphere(t_vec3 vec, t_color col, float radius)
 	return (sphere);
 }
 
-void printimage(void *param)
+void printimage(void *param, t_map *map)
 {
 	t_var *var;
 	var = param;
@@ -110,17 +111,24 @@ void printimage(void *param)
 	hittable_list_init(&world);
 
 	int i = 0;
-	int sphere_count = 40;
+	int sphere_count = map->element_count->sphere;
 
 	t_sphere *spheres = malloc(sizeof(t_sphere) * sphere_count);
-	int x = 0;
-	int y = -30;
-	int z = 100;
-	int r = 77;
-	int g = 158;
-	int b = 176;
+	//int x = 0;
+	//int y = -30;
+	//int z = 100;
+	//int r = 77;
+	//int g = 158;
+	//int b = 176;
 
-	while (i < sphere_count)
+	while (map->spheres)
+	{
+		spheres[i] = addsphere(t_vec3_create(map->spheres->x, map->spheres->y, map->spheres->z), t_color_create(map->spheres->r, map->spheres->g, map->spheres->b), map->spheres->diameter);
+		hittable_list_add(&world, (t_hittable *)&spheres[i]);
+		map->spheres = map->spheres->next;
+		i++;
+	}
+	/*
 	{
 		spheres[i] = addsphere(t_vec3_create(x, y, z), t_color_create(r, g, b), 4);
 		hittable_list_add(&world, (t_hittable *)&spheres[i]);
@@ -128,7 +136,7 @@ void printimage(void *param)
 		y = y + 5;
 		z = z + 5;
 		b = b + 5;
-	}
+	}*/
 
 	// t_sphere s1 = sphere_create(t_vec3_create(0, 25, 200), 100, t_color_create(60, 50, 240));
 	// t_sphere s2 = sphere_create(t_vec3_create(-27, 0, 100), 15, t_color_create(200, 56, 100));
@@ -151,14 +159,25 @@ void printimage(void *param)
 
 int main()
 {
-	t_var var;
+	t_var			var;
+	t_element_count	element_count;
+	t_map			*map;
 
+	ft_memset(&element_count, 0, sizeof(t_element_count));
+	map = malloc(sizeof(t_map));
+	setup_data(&element_count, map);
+	if (!map)
+		return (0);
+	if (read_to_parse(&element_count, map) == 0)
+		return (0);
+	print_data(map);
 	if (mlxinit(&var))
 		return (EXIT_FAILURE);
-	printimage(&var);
+	printimage(&var, map);
 	hooks(&var);
 
 	mlx_loop(var.mlx);
 	mlx_terminate(var.mlx);
+	terminate_data(map, "program ended successfully\n");
 	return (EXIT_SUCCESS);
 }

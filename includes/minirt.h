@@ -10,6 +10,7 @@
 #include <float.h>
 #include "../libft/libft.h"
 #include "../MLX42/include/MLX42/MLX42.h"
+#include "./parsing.h"
 
 #define SCREEN_HEIGHT 400 // Not in use
 #define SCREEN_WIDHT 1500
@@ -102,7 +103,7 @@ void ft_hook(void *param);
 void hooks(t_var *var);
 int mlxinit(t_var *var);
 
-void printimage(void *param);
+void printimage(void *param, t_map *map);
 
 // bool sphere_hit(const t_hittable *self, const t_ray *r, float tmin, float tmax, t_hit *rec);
 

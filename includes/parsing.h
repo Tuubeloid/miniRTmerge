@@ -6,7 +6,7 @@
 /*   By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 19:39:44 by tvalimak          #+#    #+#             */
-/*   Updated: 2024/08/20 13:49:02 by tvalimak         ###   ########.fr       */
+/*   Updated: 2024/08/20 18:17:13 by tvalimak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,18 +55,18 @@ typedef struct s_light
 	t_map			*map;
 }				t_light;
 
-typedef struct s_sphere
+typedef struct s_spheres
 {
-	float			x;
-	float			y;
-	float			z;
-	float			diameter;
-	int				r;
-	int				g;
-	int				b;
-	struct s_sphere	*next;
-	t_map			*map;
-}				t_sphere;
+	float				x;
+	float				y;
+	float				z;
+	float				diameter;
+	int					r;
+	int					g;
+	int					b;
+	struct s_spheres	*next;
+	t_map				*map;
+}				t_spheres;
 
 typedef struct s_plane
 {
@@ -115,7 +115,7 @@ typedef struct s_map
 	t_ambient		*ambient;
 	t_camera		*camera;
 	t_light			*light;
-	t_sphere		*sphere;
+	t_spheres		*spheres;
 	t_plane			*plane;
 	t_cylinder		*cylinder;
 	t_element_count	*element_count;
@@ -132,9 +132,10 @@ int		pos_decimal_check(char *str);
 int		rgb_check(char *rgb, int min, int max);
 double	ft_atof(const char *str);
 int		vectors_check(char *str);
-int 	degree_check(char *str, int min, int max);
+int		degree_check(char *str, int min, int max);
 int		xyz_check(char *str);
 int		decimal_check(char *str, int min, int max);
+int		read_to_parse(t_element_count *element_count, t_map *map);
 
 /* ************************************************************************** */
 /*                                 validate_camera                            */
@@ -168,10 +169,10 @@ int		setup_data(t_element_count *element_count, t_map *map);
 int		setup_ambient(char **split, t_map *map);
 int		setup_camera(char **split, t_map *map);
 int		setup_light(char **split, t_map *map);
-int		setup_sphere(char **split, t_map *map);
+int		setup_spheres(char **split, t_map *map);
 int		setup_plane(char **split, t_map *map);
 int		setup_cylinder(char **split, t_map *map);
-int 	terminate_data(t_map *map, char *error);
+int		terminate_data(t_map *map, char *error);
 
 /* ************************************************************************** */
 /*                                 	util functions                            */

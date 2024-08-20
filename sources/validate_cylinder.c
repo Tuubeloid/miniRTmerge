@@ -6,7 +6,7 @@
 /*   By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 13:14:50 by tvalimak          #+#    #+#             */
-/*   Updated: 2024/08/20 13:50:33 by tvalimak         ###   ########.fr       */
+/*   Updated: 2024/08/20 18:42:26 by tvalimak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int validate_cylinder(char *line, t_element_count *element_count, \
         printf("returning 0 from validate_cylinder 5\n");
         return (free_split(split));
     }
-    if (rgb_check(split[5], 0, 255) == 0)
+    if (rgb_check(split[5], 0, 256) == 0)
     {
         printf("returning 0 from validate_cylinder 6\n");
         return (free_split(split));

@@ -6,7 +6,7 @@
 /*   By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 18:26:47 by tvalimak          #+#    #+#             */
-/*   Updated: 2024/08/20 13:52:04 by tvalimak         ###   ########.fr       */
+/*   Updated: 2024/08/20 18:46:43 by tvalimak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int read_to_parse(t_element_count *element_count, t_map *map)
 	int		fd;
 	char	*line;
 
-	fd = open("/home/tvalimak/Hive/miniRTParse/srcs/test.rt", O_RDONLY);
-	//fd = open("/home/tvalimak/miniRTparsing/srcs/test.rt", O_RDONLY);
+	//fd = open("/home/tvalimak/Hive/miniRTmerge/sources/test.rt", O_RDONLY);
+	fd = open("/home/tvalimak/miniRTmerge/sources/test.rt", O_RDONLY);
 	if (fd == -1)
 	{
 		printf("Error in fd\n");

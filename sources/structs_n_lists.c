@@ -6,7 +6,7 @@
 /*   By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 11:10:02 by tvalimak          #+#    #+#             */
-/*   Updated: 2024/08/20 13:50:18 by tvalimak         ###   ########.fr       */
+/*   Updated: 2024/08/20 16:32:04 by tvalimak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	print_data(t_map *map)
 	}
 
 	// Print Sphere List
-	t_sphere *sphere = map->sphere;
+	t_spheres *sphere = map->spheres;
 	while (sphere)
 	{
 		printf("Sphere:\n");
@@ -131,8 +131,8 @@ int terminate_data(t_map *map, char *error)
     t_light *light;
     t_camera *next_camera;
     t_light *next_light;
-    t_sphere *sphere;
-    t_sphere *next_sphere;
+    t_spheres *sphere;
+    t_spheres *next_sphere;
     t_plane *plane;
     t_plane *next_plane;
     t_cylinder *cylinder;
@@ -156,7 +156,7 @@ int terminate_data(t_map *map, char *error)
         free(light);
         light = next_light;
     }
-    sphere = map->sphere;
+    sphere = map->spheres;
     while (sphere)
     {
         next_sphere = sphere->next;

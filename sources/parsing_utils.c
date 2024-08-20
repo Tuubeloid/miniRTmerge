@@ -6,7 +6,7 @@
 /*   By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 19:18:40 by tvalimak          #+#    #+#             */
-/*   Updated: 2024/08/20 13:49:41 by tvalimak         ###   ########.fr       */
+/*   Updated: 2024/08/20 18:38:00 by tvalimak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int is_rgb_number(char **split)
 				break ;
 			printf("inside is rgb number while loop 2\n");
 			printf("split[i][j] = %c\n", split[i][j]);
-			if (!isdigit(split[i][j]))
+			if (!ft_isdigit(split[i][j]))
 			{
 				printf("returning 0 from is rgb number\n");
 				return (0);
@@ -62,11 +62,20 @@ int	rgb_check(char *rgb, int min, int max)
 		return (free_split(split));
 	printf("inside rgb check 1\n");
 	if (ft_atoi(split[0]) < min || ft_atoi(split[0]) > max)
+	{
+		printf("returning 0 from rgb check 0\n");
 		return (free_split(split));
+	}
 	if (ft_atoi(split[1]) < min || ft_atoi(split[1]) > max)
+	{
+		printf("returning 0 from rgb check 1\n");
 		return (free_split(split));
+	}
 	if (ft_atoi(split[2]) < min || ft_atoi(split[2]) > max)
+	{
+		printf("returning 0 from rgb check 2\n");
 		return (free_split(split));
+	}
 	free_split(split);
 	printf("returned 1 from rgb check\n");
 	return (1);
@@ -79,9 +88,9 @@ int pos_decimal_check(char *str)
 
     while (*c)
 	{
-        if (ft_isdigit(*c) && *c != '.')
+        if (!ft_isdigit(*c) && *c != '.')
 		{
-            printf("returning 0 from pos decimal check\n");
+            printf("returning 0 from pos decimal check 0\n");
             return 0;
         }
         c++;
@@ -93,15 +102,15 @@ int pos_decimal_check(char *str)
 		printf("returning 0 from pos decimal check 1\n");
 		return (0);
     }
-    while (!ft_isdigit(*c))
+    while (ft_isdigit(*c))
         c++;
     if (*c == '.')
         c++;
-    while (!ft_isdigit(*c))
+    while (ft_isdigit(*c))
         c++;
     if (*c != '\0' || value < 0.0 || value > 1.0)
 	{
-        printf("returning 0 from pos decimal check\n");
+        printf("returning 0 from pos decimal check 2\n");
         return 0;
     }
     printf("returned 1 from pos decimal check\n");

@@ -6,7 +6,7 @@
 /*   By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 12:59:22 by tvalimak          #+#    #+#             */
-/*   Updated: 2024/08/20 13:50:47 by tvalimak         ###   ########.fr       */
+/*   Updated: 2024/08/20 16:32:37 by tvalimak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	validate_sphere(char *line, t_element_count *element_count, t_map *map)
         printf("returning 0 from validate_sphere 4\n");
         return (free_split(split));
     }
-    if (setup_sphere(split, map) == 0)
+    if (setup_spheres(split, map) == 0)
         return (free_split(split));
     free_split(split);
     printf("returned 1 from validate_sphere\n");

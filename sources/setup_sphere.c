@@ -6,37 +6,37 @@
 /*   By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 09:59:52 by tvalimak          #+#    #+#             */
-/*   Updated: 2024/08/20 13:50:13 by tvalimak         ###   ########.fr       */
+/*   Updated: 2024/08/20 16:30:51 by tvalimak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/parsing.h"
 
-static t_sphere	*setup_sphere_helper(t_map *map)
+static t_spheres	*setup_spheres_helper(t_map *map)
 {
-	t_sphere	*temp;
+	t_spheres	*temp;
 
-	if (!map->sphere)
+	if (!map->spheres)
 	{
 		printf("inside setup_sphere_helper 1\n");
-		map->sphere = malloc(sizeof(t_sphere));
-		if (!map->sphere)
+		map->spheres = malloc(sizeof(t_spheres));
+		if (!map->spheres)
 			return (NULL);
-		map->sphere->next = NULL;
+		map->spheres->next = NULL;
 	}
 	else
 	{
 		printf("inside setup_sphere_helper 2\n");
-		temp = map->sphere;
+		temp = map->spheres;
 		while (temp->next)
 			temp = temp->next;
-		temp->next = malloc(sizeof(t_sphere));
+		temp->next = malloc(sizeof(t_spheres));
 		if (temp->next == NULL)
 			return (NULL);
 		temp->next->next = NULL;
 		return temp->next;
 	}
-	return map->sphere;
+	return map->spheres;
 }
 
 /*identifier: sp
@@ -44,14 +44,14 @@ static t_sphere	*setup_sphere_helper(t_map *map)
 ∗ the sphere diameter: 12.6
 ∗ R,G,B colors in range [0-255]: 10, 0, 255*/
 
-int	setup_sphere(char **split, t_map *map)
+int	setup_spheres(char **split, t_map *map)
 {
 	char	**rgb;
     char    **xyz;
-    t_sphere  *new_sphere;
+    t_spheres  *new_sphere;
 
 	printf("inside setup_sphere\n");
-	new_sphere = setup_sphere_helper(map);
+	new_sphere = setup_spheres_helper(map);
 	rgb = ft_split(split[3], ',');
     xyz = ft_split(split[1], ',');
     new_sphere->x = ft_atof(xyz[0]);

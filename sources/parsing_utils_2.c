@@ -6,7 +6,7 @@
 /*   By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 11:19:13 by tvalimak          #+#    #+#             */
-/*   Updated: 2024/08/20 13:49:35 by tvalimak         ###   ########.fr       */
+/*   Updated: 2024/08/20 18:30:10 by tvalimak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int decimal_check(char *str, int min, int max)
     c = str;
     while (*c)
     {
-        if (ft_isdigit(*c) && *c != '.' && *c != '-')
+        if (!ft_isdigit(*c) && *c != '.' && *c != '-')
         {
             printf("returning 0 from decimal check 0\n");
             return 0;
@@ -53,11 +53,11 @@ int decimal_check(char *str, int min, int max)
     value = ft_atof(str);
     if (*c == '-')
         c++;
-    while (!ft_isdigit(*c))
+    while (ft_isdigit(*c))
         c++;
     if (*c == '.')
         c++;
-    while (!ft_isdigit(*c))
+    while (ft_isdigit(*c))
         c++;
     if (*c != '\0' || value < min || value > max) 
     {
